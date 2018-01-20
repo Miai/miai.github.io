@@ -166,15 +166,16 @@ h1 {
 @media (max-width: 480px) {
   /* TODO - switch this, make it mobile first instead of mobile only */
   .deck {
-    /* padding: 20px 10px; */
+    padding: 20px 0;
     margin: 0;
-    justify-content: space-around;
+    justify-content: center;
   }
 
   .deck .card {
     width: 25vw;
     height: 25vw;
     margin: 0;
+    border: 1px solid rgba(255,255,255,.5);
   }
 }
 
