@@ -177,6 +177,15 @@ h1 {
     margin: 0;
     border: 1px solid rgba(255,255,255,.5);
   }
+
+  #modal-container .modal-background .modal {
+    width: 80%;
+    padding: 30px;
+  }
+  .score-panel {
+    width: 100%;
+    margin: 0 auto;
+  }
 }
 
 
