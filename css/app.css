@@ -131,6 +131,9 @@ h1 {
   background: #02b3e4;
   cursor: default;
 }
+.deck .card.open svg {
+  transform: rotateY(180deg);
+}
 .deck .card.show {
   font-size: 33px;
 }
@@ -166,16 +169,16 @@ h1 {
 @media (max-width: 480px) {
   /* TODO - switch this, make it mobile first instead of mobile only */
   .deck {
-    padding: 20px 0;
-    margin: 0;
-    justify-content: center;
+    padding: 10px 0;
+    justify-content: space-around;
+    margin: 20px 0 0 0;
   }
 
   .deck .card {
-    width: 25vw;
-    height: 25vw;
-    margin: 0;
-    border: 1px solid rgba(255,255,255,.5);
+    width: 23vw;
+    height: 23vw;
+    margin: 2px 0;
+    border: 1px solid rgba(255,255,255,.3);
   }
 
   #modal-container .modal-background .modal {
@@ -185,6 +188,7 @@ h1 {
   .score-panel {
     width: 100%;
     margin: 0 auto;
+    padding: 0 20px;
   }
 }
 

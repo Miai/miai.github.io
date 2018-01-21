@@ -25,6 +25,7 @@ let designArray = [];
 let openedArray = [];
 let pairsArray = [];
 let moves = 0;
+let pairMoves = 0;
 /* Timer variables */
 const hoursSelector = document.querySelectorAll('.hours');
 const minutesSelector = document.querySelectorAll('.minutes');
@@ -64,7 +65,7 @@ function createGameBoard(desiredNoOfPairs) {
 }
 
 /**
- * Timer Setup
+ * @description Timer Setup
  */
 function timer() {
     /* TODO
@@ -98,7 +99,7 @@ function displayTimer(h, m, s) {
 }
 
 /**
- * Game clicking actions
+ * @description Game clicking actions
  */
 boardDeck.addEventListener('click', function clickedCard(event) {
     if(event.target.classList.contains('show')){
@@ -114,21 +115,24 @@ boardDeck.addEventListener('click', function clickedCard(event) {
         updateMoves(moves);
         myTimer();
         event.target.firstChild.setAttribute('data-move', moves);
-        starRating(moves);
+        starRating(pairMoves);
         checkSimilarity();
         gameEnded();
     }
 });
 
 function updateMoves (moves) {
-    for (var i = 0; i < movesCounter.length; i++) {
-        movesCounter[i].innerHTML = moves;
-        }
+    pairMoves = Math.floor(moves/2);
+    if ((moves % 2) == 0) {
+        for (var i = 0; i < movesCounter.length; i++) {
+            movesCounter[i].innerHTML = pairMoves;
+            }
+    }
 }
 
 
 /**
- * Check if the 2 clicked cards match and if so keep them "face up"
+ * @description Check if the 2 clicked cards match and if so keep them "face up"
  */
 function checkSimilarity() {
     if(openedArray.length === 2) {
@@ -146,7 +150,7 @@ function checkSimilarity() {
 }
 
 /**
- * Turn cards back upside down if they don't match
+ * @description Turn cards back upside down if they don't match
  */
 function turnCards() {
     document.querySelector('[data-move="' + (moves-1) + '"]').parentNode.setAttribute('class', 'card');
@@ -154,7 +158,7 @@ function turnCards() {
 }
 
 /**
- * Determine if the game has ended
+ * @description Determine if the game has ended
  */
 function gameEnded() {
     if(designArray.length === pairsArray.length) {
@@ -164,7 +168,7 @@ function gameEnded() {
 }
 
 /**
- * Adding the modal
+ * @description Adding/updating info to the modal
  */
 function modalView() {
     const cloneAllStars = allStars.cloneNode(true);
@@ -176,8 +180,9 @@ function modalView() {
 
 
 /**
- * Determine the number of stars based on moves.
+ * @description Determine the number of stars based on moves
  * TODO: Maybe make so that it takes into account the time as well
+ * @param {number} noOfMoves - number of total cards turned
  */
 function starRating(noOfMoves) {
     if(noOfMoves === 0) {
@@ -185,16 +190,16 @@ function starRating(noOfMoves) {
         allStarsItems[1].innerHTML = '<li><i class="fa fa-star"></i></li>';
         allStarsItems[2].innerHTML = '<li><i class="fa fa-star"></i></li>';
         return;
-    } else if (noOfMoves > (desiredNoOfPairs * 3) && noOfMoves <= (desiredNoOfPairs * 4)) {
+    } else if (noOfMoves > (desiredNoOfPairs + desiredNoOfPairs / 2) && noOfMoves <= (desiredNoOfPairs * 2)) {
                 allStarsItems[0].innerHTML = '<li><i class="far fa-star"></i></li>';
-            } else if (noOfMoves > (desiredNoOfPairs * 4) && noOfMoves <= (desiredNoOfPairs * 5)) {
+            } else if (noOfMoves > (desiredNoOfPairs * 2) && noOfMoves <= (desiredNoOfPairs * 3)) {
                         allStarsItems[1].innerHTML = '<li><i class="far fa-star"></i></li>';
-                    } else if(noOfMoves > (desiredNoOfPairs * 5)) {
-                                allStarsItems[2].innerHTML = '<li><i class="far fa-star"></i></li>';
-                            }
+                    }
 }
 
-// Shuffle function from http://stackoverflow.com/a/2450976
+/**
+ * @description Shuffle function from http://stackoverflow.com/a/2450976
+ */
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -209,11 +214,10 @@ function shuffle(array) {
     return array;
 }
 
-/* 
- *Helper function that allows me and makes sure 
- *that a function is run only once
- Take from - https://davidwalsh.name/javascript-once
- */
+/**
+* @description Helper function that make sure that functions run through it
+* are runned only once from https://davidwalsh.name/javascript-once
+*/
 function once(fn, context) { 
 	var result;
 	return function() { 
@@ -226,10 +230,11 @@ function once(fn, context) {
 }
 
 /**
- * Initialization function that sets/resets everything
+ * @description Initialization function that sets/resets everything
  */
 function init() {
     moves = 0;
+    pairMoves = 0;
     designArray = [];
     openedArray = [];
     pairsArray = [];
