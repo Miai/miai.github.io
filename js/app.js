@@ -187,12 +187,13 @@ function modalView() {
  * @param {number} noOfMoves - number of total cards turned
  */
 function starRating(noOfMoves) {
+    console.log(desiredNoOfPairs +(desiredNoOfPairs / 2));
     if(noOfMoves === 0) {
         allStarsItems[0].innerHTML = '<li><i class="fa fa-star"></i></li>';
         allStarsItems[1].innerHTML = '<li><i class="fa fa-star"></i></li>';
         allStarsItems[2].innerHTML = '<li><i class="fa fa-star"></i></li>';
         return;
-    } else if (noOfMoves > (desiredNoOfPairs + desiredNoOfPairs / 2) && noOfMoves <= (desiredNoOfPairs * 2)) {
+    } else if (noOfMoves > (desiredNoOfPairs +(desiredNoOfPairs / 2)) && noOfMoves <= (desiredNoOfPairs * 2)) {
                 allStarsItems[0].innerHTML = '<li><i class="far fa-star"></i></li>';
             } else if (noOfMoves > (desiredNoOfPairs * 2) && noOfMoves <= (desiredNoOfPairs * 3)) {
                         allStarsItems[1].innerHTML = '<li><i class="far fa-star"></i></li>';
@@ -293,7 +294,7 @@ function initWithURLParameter() {
         init();
         return;
     } else {
-        desiredNoOfPairs = urlParameterValue;
+        desiredNoOfPairs = parseFloat(urlParameterValue);
         init();
         return;
     }
