@@ -18,9 +18,11 @@ const allStars = document.querySelector('.stars');
 const bodyEl = document.body;
 const modalContainer = document.getElementById('modal-container');
 const modalScore = modalContainer.querySelector('.restart');
-let modalStars;
+let modalStars = document.querySelector('.stars');
 /* Board generation and stats */
 let desiredNoOfPairs = 8; /* Get dynamically the number of pairs that the players wants */
+let urlParameter = null;
+const urlParameterString = 'pairs';
 let designArray = [];
 let openedArray = [];
 let pairsArray = [];
@@ -271,4 +273,27 @@ function buttonsReset() {
     }
 }
 
-init();
+/**
+ * @description Function that retrieves URL parameters taken from https://stackoverflow.com/questions/11582512/how-to-get-url-parameters-with-javascript/11582513#11582513
+ * @param {string} name - name of the paramater
+ */
+function getURLParameter(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+  }
+
+/**
+ * Initialize the game with the number of desired pairs as a URL parameter
+ * 
+ */
+function initWithURLParameter() {
+    urlParameterValue = getURLParameter(urlParameterString);
+    if(urlParameterValue === null) {
+        init();
+        return;
+    } else {
+        desiredNoOfPairs = urlParameterValue;
+        init();
+        return;
+    }
+}
+initWithURLParameter();
