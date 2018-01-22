@@ -187,7 +187,6 @@ function modalView() {
  * @param {number} noOfMoves - number of total cards turned
  */
 function starRating(noOfMoves) {
-    console.log(desiredNoOfPairs +(desiredNoOfPairs / 2));
     if(noOfMoves === 0) {
         allStarsItems[0].innerHTML = '<li><i class="fa fa-star"></i></li>';
         allStarsItems[1].innerHTML = '<li><i class="fa fa-star"></i></li>';
@@ -291,6 +290,9 @@ function getURLParameter(name) {
 function initWithURLParameter() {
     urlParameterValue = getURLParameter(urlParameterString);
     if(urlParameterValue === null) {
+        init();
+        return;
+    } else if(isNaN(parseFloat(urlParameterValue))) {
         init();
         return;
     } else {
