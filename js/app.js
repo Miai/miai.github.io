@@ -18,7 +18,7 @@ const allStars = document.querySelector('.stars');
 const bodyEl = document.body;
 const modalContainer = document.getElementById('modal-container');
 const modalScore = modalContainer.querySelector('.restart');
-let modalStars = document.querySelector('.stars');
+let modalStars;
 /* Board generation and stats */
 let desiredNoOfPairs = 8; /* Get dynamically the number of pairs that the players wants */
 let urlParameter = null;
@@ -267,7 +267,9 @@ function buttonsReset() {
                 modalContainer.setAttribute('class', 'out');
                 bodyEl.removeAttribute('class');
                 starRating(0);
-                modalStars.remove();
+                if (typeof modalStars !== 'undefined'){
+                    modalStars.remove();
+                }
                 event.preventDefault();
         });
     }
