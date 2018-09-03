@@ -1,0 +1,1 @@
+console.log('%c Hey, this is empty! ', 'background: #222; color: #bada55');
